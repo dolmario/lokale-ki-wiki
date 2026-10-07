@@ -1,0 +1,1 @@
+Finde den aktuellen Browserport, die API-Basis und den Modellalias. Nenne jeweils die Quelle undVersion. Welcher CPU-Typ ist eingebaut? Wenn die Quellen es nicht sagen, benenne das fehlende Wissen. Erkläre den Unterschied zwischen einer gespeicherten Rohquelle und einer geprüften, indexierten Wissensseite.
