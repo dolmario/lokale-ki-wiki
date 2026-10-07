@@ -1,0 +1,28 @@
+{
+  "source_date": "2026-09-19",
+  "original_sha256": "2789090cf2b47eff769bbc72a2b5fdad428afe763bb84ad1262530d99bb04c35",
+  "sources": 40,
+  "fields_per_source": 6,
+  "cold_runs": 2,
+  "decisions_per_model": 480,
+  "independent_documents": 40,
+  "models": [
+    {
+      "model_archive_label": "qwen36-normal-off",
+      "decisions": 480,
+      "correct": 334,
+      "percent": 69.6,
+      "95percent_precision_60percent_coverage_gate": false
+    },
+    {
+      "model_archive_label": "hauhaucs-q4-off",
+      "decisions": 480,
+      "correct": 372,
+      "percent": 77.5,
+      "95percent_precision_60percent_coverage_gate": false
+    }
+  ],
+  "general_ranking": false,
+  "private_documents_included": false,
+  "fresh_test": false
+}
