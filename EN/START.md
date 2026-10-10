@@ -1,31 +1,63 @@
 # Find your working local AI command again
 
-This kit contains fictional sources you can compare in a text editor. Actual ingestion requires an existing Wiki app and its running model server. A public download for our archived portable LLM Wiki 0.6.11 build has not been verified here. This kit installs no app and modifies no real Wiki.
+Goal: store the port, API address and model alias of a running local model server in a Wiki so that you can later find the **current** value with its source and version. You practise with two fictional files.
 
-1. Extract the complete English ZIP. Open QUELLE-V1.md and QUELLE-V2.md. These small sources are in German; questions are available in English.
-2. Version 1 is superseded; version 2 is current. Port 8091, the API address and alias are fictional values. No actual server runs for this exercise.
-3. Prepare a new isolated learning folder. Open PowerShell in the companion folder and adapt the example path:
+## 1. Look at the sources
+
+Extract the ZIP completely and open `QUELLE-V1.md` and `QUELLE-V2.md` (the sources are in German, the questions exist in English):
+
+| | QUELLE-V1 (superseded) | QUELLE-V2 (current) |
+|---|---|---|
+| Browser | port 8080 | `http://127.0.0.1:8091` |
+| API base | – | `http://127.0.0.1:8091/v1` |
+| Model alias | `lernmodell-alt` | `lernmodell` |
+| Context | – | 4096 tokens (input and answer share it) |
+| CPU type | not documented | not documented |
+
+Port 8091 and the addresses are practice values; no server runs for them.
+
+## 2. Prepare the learning folder
 
 ```powershell
 .\VORBEREITEN-WIKI.ps1 -OutputDirectory "C:\your\Wiki-Learning-Project"
 ```
 
-4. Inspect raw\sources and VORBEREITUNG.json there. Both sources were copied unchanged. No ingestion, indexing or MCP call was performed.
-5. For actual ingestion, select a separate learning project in your existing app. First check resources and active jobs. Our native ingestion requires a running model server.
-6. Verify your actual API base, model ID and project model. The example port does not prescribe your installation.
-7. Record the project path and ID. Import only the two fictional sources using your app version's import method. Our helper creates no queue.
-8. Read actual job state and errors. Resolve a missing server or busy resources. Do not start a second instance or stop someone else's processes.
-9. After actual completion, record the pages genuinely written. Queue status and cached hashes do not prove correct content.
-10. Compare page and source: current version, port 8091, complete API address and alias lernmodell. The CPU type is unspecified and must remain unknown.
-11. Correct specific errors with source references. Preserve originals and identifiable corrections. A high model score does not replace review.
-12. Actually index the reviewed page in your Wiki. Save real index state and errors. Embedding also consumes model resources.
-13. Read the full page back through your available Wiki MCP. Use the correct project and real path. Our MCP offers llm_wiki_read_file. A file list is not content readback.
-14. Search for a specific source phrase and inspect the result. Ask FRAGEN-EN.txt in your client and preserve the actual response, then open SOLLWERT.md.
-15. Complete PRUEFPROTOKOLL.csv. Saved, processed, reviewed, indexed and read back through MCP are separate states. Leave unverified fields blank.
-16. ARCHIV-ERGEBNIS.json describes a limited old experiment: 40 sources, six fields and two cold runs yield 480 decisions per model, not 480 independent documents. Correct decisions numbered 334 and 372. No tested threshold achieved both 95 percent precision and 60 percent coverage.
+The folder must not exist yet. Result:
 
-## Jev idea and current sources
+```text
+C:\your\Wiki-Learning-Project\
+  raw\sources\QUELLE-V1.md
+  raw\sources\QUELLE-V2.md
+  VORBEREITUNG.json     (file names, SHA256, native_ingest/indexed/mcp_readback = false, http_requests = 0)
+```
 
-Our historical Jev-inspired selection experiment is a separate archive finding. openjev-sglang now points to SGLang's native decisions API. Its /v1/decisions is an SGLang extension; documentation mentions a nightly build until a matching release exists. Values are not calibrated truth probabilities. We neither installed nor executed that external route here. QUELLEN.md lists primary sources.
+## 3. Import into your Wiki app
 
-The new film uses separately approved MOSS narration, our own fictional presenter and DOLMARIO AI llama. Your actual ingestion and complete listening need separate verification.
+Create a separate learning project in your existing app and import the two files from `raw\sources` using your app version's import route. Import needs the running model server. Enter your real API base and model ID (the practice values only apply inside the sources). If a queue is already running, wait; do not start a second instance.
+
+## 4. Check the written page
+
+The page must contain: version 2 as current, port 8091, `http://127.0.0.1:8091/v1`, alias `lernmodell`, 4096 tokens context, and "unknown" for the CPU type. If it says 8080, `lernmodell-alt` or an invented processor, correct the page with a reference to `QUELLE-V2.md` and keep the original.
+
+## 5. Index and read back
+
+Index the reviewed page in your Wiki. Then read it back completely through the Wiki MCP (`llm_wiki_read_file` with your project and the page path). A file list only shows that the page exists, not its content.
+
+## 6. Ask the questions
+
+Put the text from `FRAGEN-EN.txt` into your client. Expected (see `SOLLWERT.md`): port 8091, API `http://127.0.0.1:8091/v1`, alias `lernmodell`, each from QUELLE-V2 / version 2; the CPU type is missing from the sources.
+
+## 7. Record
+
+Add a row to `PRUEFPROTOKOLL.csv`, for example:
+
+```text
+eigenes_projekt,rohe_quelle_hash,native_verarbeitung,geschriebene_seite,inhaltsvergleich,indexstatus,mcp_inhalt_gelesen,aktuelle_quelle,fehlendes_wissen,fehler,datum
+lernprojekt-1,<SHA256 from VORBEREITUNG.json>,yes,yes,ok,indexed,yes,QUELLE-V2.md,CPU type,none,2026-10-10
+```
+
+Leave fields you did not check empty.
+
+## Background: the Jev experiment
+
+`ARCHIV-ERGEBNIS.json` summarises an older, Jev-inspired attempt to select fields automatically: 40 sources × 6 fields × 2 runs = 480 decisions per model (not 480 independent documents), of which 334 and 372 were correct. No tested threshold reached 95 % precision and 60 % coverage at once. openjev-sglang now points to SGLang's native decisions API (`/v1/decisions`, a nightly build according to its documentation); we did not run that route. Primary sources: `QUELLEN.md`.

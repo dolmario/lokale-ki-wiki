@@ -1,31 +1,67 @@
 # Deinen funktionierenden KI-Befehl wiederfinden
 
-Ein Lernpaket mit erfundenen Quellen. Du kannst sie im Texteditor vergleichen. Ein echter Import benötigt eine vorhandene Wiki-App und ihren laufenden Modellserver. Eine öffentliche Bezugsquelle für unseren archivierten portablen Build LLM Wiki 0.6.11 ist hier nicht verifiziert. Das Paket installiert keine App und verändert keine echte Wiki.
+Ziel: Port, API-Adresse und Modellalias eines laufenden lokalen Modellservers so im Wiki ablegen, dass du später die **aktuelle** Angabe samt Quelle und Version wiederfindest. Geübt wird mit zwei erfundenen Dateien.
 
-1. Entpacke die deutsche ZIP vollständig. Öffne QUELLE-V1.md und QUELLE-V2.md.
-2. Version 1 ist ersetzt; Version 2 ist aktuell. Port 8091, API-Adresse und Alias sind erfundene Übungswerte. Dafür läuft kein echter Server.
-3. Bereite einen neuen Lernordner vor. Öffne PowerShell im Begleitordner und passe den Beispielpfad an:
+## 1. Quellen ansehen
+
+Entpacke die ZIP vollständig und öffne `QUELLE-V1.md` und `QUELLE-V2.md`:
+
+| | QUELLE-V1 (ersetzt) | QUELLE-V2 (aktuell) |
+|---|---|---|
+| Browser | Port 8080 | `http://127.0.0.1:8091` |
+| API-Basis | – | `http://127.0.0.1:8091/v1` |
+| Modellalias | `lernmodell-alt` | `lernmodell` |
+| Kontext | – | 4096 Token (Eingabe und Antwort teilen ihn) |
+| CPU-Typ | nicht dokumentiert | nicht dokumentiert |
+
+Port 8091 und die Adressen sind Übungswerte; dafür läuft kein Server.
+
+## 2. Lernordner vorbereiten
 
 ```powershell
 .\VORBEREITEN-WIKI.ps1 -OutputDirectory "C:\dein\Wiki-Lernprojekt"
 ```
 
-4. Prüfe raw\sources und VORBEREITUNG.json dort. Beide Quellen sind unverändert kopiert. Es wurden weder Import noch Index oder MCP ausgeführt.
-5. Für einen tatsächlichen Import wähle ein getrenntes Lernprojekt in deiner vorhandenen App. Prüfe freie Ressourcen und laufende Aufträge. Unser nativer Ingest braucht den laufenden Modellserver.
-6. Kontrolliere deine tatsächliche API-Basis, Modell-ID und das Projektmodell. Der Beispielport ist keine Vorgabe für deine Installation.
-7. Notiere Projektpfad und Projekt-ID. Importiere nur die zwei erfundenen Quellen über den Importweg deiner App-Version. Unser Werkzeug erstellt keine Warteschlange.
-8. Lies tatsächlichen Auftragsstatus und Fehler. Kläre einen fehlenden Server oder belegte Ressourcen. Starte keine zweite Instanz und beende keine fremden Prozesse.
-9. Nach dem echten Abschluss notiere die wirklich geschriebenen Seiten. Queue-Status und Cache-Hash allein beweisen ihre Richtigkeit nicht.
-10. Vergleiche Seite und Rohquelle: aktuelle Version, Port 8091, vollständige API-Adresse und Alias lernmodell. Der CPU-Typ fehlt und muss unbekannt bleiben.
-11. Korrigiere konkrete Fehler mit Quellenbezug. Bewahre Original und nachvollziehbare Korrektur. Ein hoher Modellscore ersetzt diese Prüfung nicht.
-12. Indexiere die geprüfte Seite in deiner vorhandenen Wiki. Sichere echten Indexstatus und Fehler. Embedding beansprucht ebenfalls Modellressourcen.
-13. Lies die ganze Seite über dein vorhandenes Wiki-MCP zurück. Verwende das richtige Projekt und den wirklichen Pfad. Unser MCP bietet dafür llm_wiki_read_file. Eine Dateiliste ist noch kein Inhaltsrücklesen.
-14. Suche nach einer konkreten Formulierung aus der Quelle und prüfe den Treffer. Stelle FRAGEN-DE.txt im eigenen Client und bewahre die Antwort. Öffne erst danach SOLLWERT.md.
-15. Fülle PRUEFPROTOKOLL.csv aus. Abgelegt, verarbeitet, geprüft, indexiert und per MCP gelesen sind getrennte Zustände. Ungeprüfte Felder bleiben leer.
-16. ARCHIV-ERGEBNIS.json ist ein begrenzter alter Versuch: 40 Quellen, sechs Felder, zwei Kaltläufe, 480 Entscheidungen pro Modell. Es waren keine 480 unabhängigen Dokumente. 334 und 372 Entscheidungen waren richtig. Keine getestete Schwelle erreichte zugleich 95 Prozent Präzision und 60 Prozent Abdeckung.
+Der Ordner darf noch nicht existieren. Ergebnis:
 
-## Jev-Idee und heutige Quellen
+```text
+C:\dein\Wiki-Lernprojekt\
+  raw\sources\QUELLE-V1.md
+  raw\sources\QUELLE-V2.md
+  VORBEREITUNG.json     (Dateinamen, SHA256, native_ingest/indexed/mcp_readback = false, http_requests = 0)
+```
 
-Der alte Jev-inspirierte Auswahlversuch ist ein eigener Archivbefund. openjev-sglang verweist inzwischen auf SGLangs native Entscheidungs-API. Deren /v1/decisions ist eine SGLang-Erweiterung; die Dokumentation nennt einen Nightly-Build, solange keine passende Release vorliegt. Ihre Werte sind keine kalibrierten Wahrheitswahrscheinlichkeiten. Wir haben diesen externen Weg weder installiert noch ausgeführt. QUELLEN.md nennt die Primärquellen.
+## 3. Import in deine Wiki-App
 
-Der neue Film verwendet die separat bestätigte MOSS-Sprecherin, die eigene fiktive Moderatorin und das DOLMARIO-AI-Lama. Ein eigener erfolgreicher Import und vollständiges Endhören sind gesondert zu belegen.
+Lege in deiner vorhandenen App ein getrenntes Lernprojekt an und importiere die zwei Dateien aus `raw\sources` auf dem Importweg deiner App-Version. Der Import braucht den laufenden Modellserver. Trage deine echte API-Basis und Modell-ID ein (die Übungswerte gelten nur in den Quellen). Läuft schon eine Warteschlange, warte ab; starte keine zweite Instanz.
+
+## 4. Geschriebene Seite prüfen
+
+Die Seite muss enthalten: Version 2 als aktuell, Port 8091, `http://127.0.0.1:8091/v1`, Alias `lernmodell`, 4096 Token Kontext, und beim CPU-Typ „unbekannt“. Steht dort 8080, `lernmodell-alt` oder ein erfundener Prozessor, korrigiere die Seite mit Verweis auf `QUELLE-V2.md` und behalte das Original.
+
+## 5. Indexieren und zurücklesen
+
+Indexiere die geprüfte Seite in deiner Wiki. Lies sie dann über das Wiki-MCP komplett zurück (`llm_wiki_read_file` mit deinem Projekt und dem Seitenpfad). Eine Dateiliste zeigt nur, dass die Seite existiert, nicht ihren Inhalt.
+
+## 6. Fragen stellen
+
+Stelle den Text aus `FRAGEN-DE.txt` in deinem Client:
+
+> Finde den aktuellen Browserport, die API-Basis und den Modellalias. Nenne jeweils die Quelle und Version. Welcher CPU-Typ ist eingebaut? …
+
+Erwartet (siehe `SOLLWERT.md`): Port 8091, API `http://127.0.0.1:8091/v1`, Alias `lernmodell`, jeweils aus QUELLE-V2 / Version 2; CPU-Typ fehlt in den Quellen.
+
+## 7. Protokoll
+
+Trage in `PRUEFPROTOKOLL.csv` eine Zeile ein, z. B.:
+
+```text
+eigenes_projekt,rohe_quelle_hash,native_verarbeitung,geschriebene_seite,inhaltsvergleich,indexstatus,mcp_inhalt_gelesen,aktuelle_quelle,fehlendes_wissen,fehler,datum
+lernprojekt-1,<SHA256 aus VORBEREITUNG.json>,ja,ja,ok,indexiert,ja,QUELLE-V2.md,CPU-Typ,keiner,2026-10-10
+```
+
+Felder, die du nicht geprüft hast, bleiben leer.
+
+## Hintergrund: Jev-Versuch
+
+`ARCHIV-ERGEBNIS.json` fasst einen älteren, Jev-inspirierten Versuch zusammen, Felder automatisch auszuwählen: 40 Quellen × 6 Felder × 2 Läufe = 480 Entscheidungen pro Modell (keine 480 unabhängigen Dokumente), davon 334 bzw. 372 richtig. Keine getestete Schwelle erreichte zugleich 95 % Präzision und 60 % Abdeckung. openjev-sglang verweist inzwischen auf SGLangs native Entscheidungs-API (`/v1/decisions`, laut Dokumentation Nightly-Build); diesen Weg haben wir nicht ausgeführt. Primärquellen: `QUELLEN.md`.
