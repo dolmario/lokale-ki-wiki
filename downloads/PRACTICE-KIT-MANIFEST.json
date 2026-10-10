@@ -1,0 +1,107 @@
+{
+  "repo": "lokale-ki-wiki",
+  "created": "2026-10-10T22:54:48.723223+02:00",
+  "zip": "C:\\Users\\JT\\Desktop\\DOLMARIO-NACHT-EN-20261010\\repos\\lokale-ki-wiki\\downloads\\PRACTICE-KIT.zip",
+  "sha256": "fc4c88d82638d5570aa395af44d02287f106a3435606ee0571c038635e25a233",
+  "bytes": 18644,
+  "zip_crc_passed": true,
+  "all_member_sha256_passed": true,
+  "members": [
+    {
+      "path": ".gitignore",
+      "sha256": "bf7bfdba48005bc417d5c2a6eb8ea6bc7f6be6b7158c8a182958439ef420f41b",
+      "bytes": 56
+    },
+    {
+      "path": "ARCHIV/README-REPO-ERSTELLUNG.md",
+      "sha256": "7c3dbd650ac5718bd1cafca370d098f43776eab765d1ee42c411c4935f2277e7",
+      "bytes": 171
+    },
+    {
+      "path": "ARCHIV-ERGEBNIS.json",
+      "sha256": "a1d9fccf265e19fc63e3d1010ad931892000c006fe7d661b2318b8525f27a14b",
+      "bytes": 759
+    },
+    {
+      "path": "DE/JEV-PRAXIS.md",
+      "sha256": "2f49c8a13847b3daf8b46226764e5495aaa633fd65b6290fe57461b1149381b1",
+      "bytes": 5791
+    },
+    {
+      "path": "DE/START.md",
+      "sha256": "4e98a0eaa5256bae6afe2fb9d372bd936e98ebf33bfedf221d1de99a2d468545",
+      "bytes": 3545
+    },
+    {
+      "path": "EN/JEV-PRACTICE.md",
+      "sha256": "9ecfa7f79296d4a3031047870a1cddf870db8da51412cecff22c0f789692793a",
+      "bytes": 3109
+    },
+    {
+      "path": "EN/START.md",
+      "sha256": "0860d33961eae01888cf3b4a4bfb55e72b6dce34281abd2f57d60e09b3ec9950",
+      "bytes": 3324
+    },
+    {
+      "path": "FRAGEN-DE.txt",
+      "sha256": "4041e4edc3fc8b6c44ff6cb3ffb7ec8ede80885af8ad18d3e99c64b62243e6ab",
+      "bytes": 311
+    },
+    {
+      "path": "FRAGEN-EN.txt",
+      "sha256": "58332ca877f30f374476fdaf6f4209daa24acf13de77aedad9f4277b1a05883f",
+      "bytes": 276
+    },
+    {
+      "path": "PAKETSTATUS.json",
+      "sha256": "ae8a0946f4d1bf48872411701047771eb223678b4e4f3891da9bd2b9348307fe",
+      "bytes": 323
+    },
+    {
+      "path": "PRUEFPROTOKOLL.csv",
+      "sha256": "1363fdb9ac2cf30dbd65b2db8c9f0fbb8e8a99193d6d257908e95fcbc689e8de",
+      "bytes": 167
+    },
+    {
+      "path": "QUELLE-V1.md",
+      "sha256": "dd49fe97f434345c7f4062789f56a5d3d38e6c63f27b4182c77fb5f12eab3b76",
+      "bytes": 162
+    },
+    {
+      "path": "QUELLE-V2.md",
+      "sha256": "144e787ff86ffc4395c50ea79545c887eeac423e6326961b53899eafbcfb2620",
+      "bytes": 330
+    },
+    {
+      "path": "QUELLEN.md",
+      "sha256": "c4e57ddf78618b05e55620fc8e2a89e096799c791d1b31c0ee19133f07281a79",
+      "bytes": 1790
+    },
+    {
+      "path": "README.md",
+      "sha256": "16294b8d083758355a79a53e2673bd5407985c02905764746aef6e1b99776d0f",
+      "bytes": 2007
+    },
+    {
+      "path": "SOLLWERT.md",
+      "sha256": "979f3737a89cf8248d0f1db4b248d79c19fe791ec2fe3723354917eec3a0cdab",
+      "bytes": 424
+    },
+    {
+      "path": "tests/test_auswahl.py",
+      "sha256": "59bcd38859ac900c941e2a67db8dd3f662d98798f2463daf33871b10e12741e7",
+      "bytes": 2862
+    },
+    {
+      "path": "VORBEREITEN-WIKI.ps1",
+      "sha256": "e56e76d709e85d0e6d666a5ff42ea22f298f239a465cd5cdf76ec51eeba76f85",
+      "bytes": 1129
+    },
+    {
+      "path": "wiki_auswahl.py",
+      "sha256": "5b6740d3c9823f82af1b7e6ce97132e8dd7c6cf619bcaefc98c6225badc6a5f7",
+      "bytes": 8217
+    }
+  ],
+  "legacy_zips_preserved": true
+}
