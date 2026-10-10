@@ -1,66 +1,21 @@
-# Lokale KI-Wiki: einen funktionierenden Befehl wiederfinden
+# The Jev Idea in Our Local Wiki
 
-**Zweck:** Du hast einen Befehl zum Laufen gebracht (Port, API-Adresse, Modellalias) und willst ihn in drei Monaten samt Quelle und Version wiederfinden. Dieses Paket zeigt den Weg dafür an einem kleinen, erfundenen Beispiel.
+Download the current practice kit: [PRACTICE-KIT.zip](downloads/PRACTICE-KIT.zip).
 
-## Datenfluss
+Send one source to a local model, inspect six fixed-choice answers and deliver the reviewed source to your Wiki’s normal input folder. This repository contains the small integration component we actually use, with source files and tests.
 
-```text
-QUELLE-V1.md / QUELLE-V2.md        (Rohquellen, Version 2 ist aktuell)
-        │  VORBEREITEN-WIKI.ps1 kopiert sie bytegleich
-        ▼
-<Lernordner>\raw\sources\*.md  +  VORBEREITUNG.json   (Dateiname + SHA256)
-        │  Import in deine vorhandene Wiki-App
-        ▼
-Wiki-Seite (von der App geschrieben)
-        │  Vergleich mit der Rohquelle
-        ▼
-geprüfte Seite → Index → Rücklesen per MCP (llm_wiki_read_file)
-        ▼
-Antwort auf FRAGEN-DE.txt, Vergleich mit SOLLWERT.md, Eintrag in PRUEFPROTOKOLL.csv
-```
+Start with [the practical walkthrough](EN/JEV-PRACTICE.md). `wiki_auswahl.py` needs Python 3.12 and an existing local llama.cpp-compatible API. It uses constrained J/N generation and token probabilities; Jev’s original prefill-only server is a different implementation.
 
-## Downloads
+Tested on 10 October: actual response `N,N,N,N,J,N` → explicit acceptance → unchanged source delivery → processing by our existing Wiki app → written page → search and complete MCP readback. Five tests cover field mapping, incomplete answers, changed sources, review and preservation of existing files.
 
-| Sprache | Komplettes Lernpaket | Anleitung |
-| --- | --- | --- |
-| Deutsch | [WIKI-LERNPAKET-DE.zip](https://raw.githubusercontent.com/dolmario/lokale-ki-wiki/main/WIKI-LERNPAKET-DE.zip) | [DE/START.md](DE/START.md) |
-| English | [WIKI-LERNPAKET-EN.zip](https://raw.githubusercontent.com/dolmario/lokale-ki-wiki/main/WIKI-LERNPAKET-EN.zip) | [EN/START.md](EN/START.md) |
+The normal Wiki app is an existing prerequisite. We used portable build 0.6.12; this repository is not its installer. The source is a fictional teaching note, retained in its original German form. Earlier ZIPs contain the older source-version exercise.
 
-## Was herauskommt
+Original inspiration: https://github.com/ekzhang/openjev-sglang
 
-Der Aufruf
+Test hardware: [GMKtec EVO-X2 / shop](https://de.gmktec.com/?ref=DolmarioAi) · advertisement / affiliate link.
 
-```powershell
-.\VORBEREITEN-WIKI.ps1 -OutputDirectory "C:\dein\Wiki-Lernprojekt"
-```
+## Deutsch
 
-legt einen neuen Ordner an (ein vorhandener Ordner wird abgelehnt) mit:
+Unser konkreter Jev-Baustein: eine Quelle an die vorhandene lokale Schnittstelle schicken, sechs Auswahlfelder prüfen und die Quelle nach ausdrücklicher Annahme an den normalen Wiki-Weg übergeben. [Die praktische Anleitung](DE/JEV-PRAXIS.md) zeigt Aufruf, echte Antwort und die Übergabestelle im Code.
 
-- `raw\sources\QUELLE-V1.md` und `QUELLE-V2.md`, unverändert kopiert,
-- `VORBEREITUNG.json` mit beiden Dateinamen, ihren SHA256-Werten und den Feldern `native_ingest`, `indexed`, `mcp_readback` (alle `false`) und `http_requests: 0`.
-
-Das Skript startet kein Modell, ruft keine API auf und verändert keine echte Wiki.
-
-## Die erwartete Antwort
-
-Die Quellen sind erfundene Server-Notizen. Nach dem Import muss deine Wiki-Seite sagen:
-
-| Frage | Richtige Antwort | Quelle |
-|---|---|---|
-| Browserport | 8091 | QUELLE-V2 (Version 1 nannte 8080 und ist ersetzt) |
-| API-Basis | `http://127.0.0.1:8091/v1` | QUELLE-V2 |
-| Modellalias | `lernmodell` (alt: `lernmodell-alt`) | QUELLE-V2 |
-| Kontext | 4096 Token, Eingabe und Antwort teilen ihn | QUELLE-V2 |
-| CPU-Typ | steht in keiner Quelle: „unbekannt“ | – |
-
-Ein Wiki, das einen CPU-Typ erfindet oder Port 8080 als aktuell ausgibt, hat die Seite falsch geschrieben; dann korrigierst du sie mit Verweis auf die Rohquelle.
-
-## Voraussetzungen und Grenzen
-
-Ein tatsächlicher Import braucht eine bereits vorhandene Wiki-App mit laufendem Modellserver. Das Paket enthält keinen App-Installer; für unseren archivierten portablen LLM-Wiki-Build 0.6.11 ist keine öffentliche Neuinstallationsquelle verifiziert. Quellen und Versionsstand: [QUELLEN.md](QUELLEN.md).
-
-`ARCHIV-ERGEBNIS.json` enthält aggregierte Zahlen eines älteren Auswahlversuchs (40 Quellen × 6 Felder × 2 Läufe = 480 Entscheidungen pro Modell; 334 bzw. 372 richtig; kein Schwellwert erreichte zugleich 95 % Präzision und 60 % Abdeckung). Private Quelltexte sind nicht enthalten.
-
-## English
-
-Purpose: keep a working command (port, API address, model alias) findable together with its source and version. Data flow: raw sources → `VORBEREITEN-WIKI.ps1` copies them byte-identically to `raw\sources` and writes `VORBEREITUNG.json` (names + SHA256) → import into your existing Wiki app → compare page with raw source → index → read back via MCP → answer `FRAGEN-EN.txt` and compare with `SOLLWERT.md`. Expected answer: port 8091, API `http://127.0.0.1:8091/v1`, alias `lernmodell`, CPU type unknown. The helper calls no API and touches no real Wiki; a real import needs your own app and running model server. See [EN/START.md](EN/START.md).
+Der vollständige Weg wurde im vorhandenen Wiki-Projekt geprüft, einschließlich geschriebener Seite, Suche und MCP-Rücklesen. Das Repo enthält den Auswahlbaustein und fünf Tests; die vorhandene Wiki-App ist Voraussetzung. Neue Videos verwenden englischen Ton und deutsche Untertitel.
